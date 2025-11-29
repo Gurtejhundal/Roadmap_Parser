@@ -62,3 +62,8 @@ Tasks (- Learn Python, - Install VS Code, etc.)
 
 Everything is stored in a database
 Your tasks, timeframes, and completion status persist automatically.
+
+
+🔗 Live App:[ https://roadmap-parser-hejupwev7zokjvpwmbhlff.streamlit.app/](https://roadmap-parser-hejupwev7zokjvpwmbhlff.streamlit.app/)
+
+
