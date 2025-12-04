@@ -1,3 +1,5 @@
 streamlit
 pandas
 fpdf
+python-docx
+Pillow

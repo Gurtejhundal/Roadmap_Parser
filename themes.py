@@ -2,7 +2,7 @@
 def get_cyberpunk_theme():
     return """
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
         :root {
             --bg: #04060d;
@@ -20,7 +20,10 @@ def get_cyberpunk_theme():
                         radial-gradient(circle at 80% 10%, rgba(86, 194, 255, 0.08), transparent 25%),
                         var(--bg);
             color: var(--muted);
-            font-family: 'Space Grotesk', 'Segoe UI', sans-serif;
+        }
+        
+        html, body, [class*="css"], [class*="st-"], .stApp {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
         }
 
         .block-container {
@@ -103,7 +106,7 @@ def get_cyberpunk_theme():
 def get_sunset_neon_theme():
     return """
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Chivo:wght@400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
         :root {
             --bg: #0c0b1a;
@@ -122,7 +125,10 @@ def get_sunset_neon_theme():
                         radial-gradient(circle at 85% 5%, rgba(252, 227, 138, 0.16), transparent 30%),
                         var(--bg);
             color: var(--text);
-            font-family: 'Chivo', 'Segoe UI', sans-serif;
+        }
+
+        html, body, [class*="css"], [class*="st-"], .stApp {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
         }
 
         .block-container {
@@ -183,7 +189,7 @@ def get_sunset_neon_theme():
 def get_aqua_glow_theme():
     return """
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
         :root {
             --bg: #031b29;
@@ -200,7 +206,10 @@ def get_aqua_glow_theme():
                         radial-gradient(circle at 80% 0%, rgba(77, 171, 255, 0.16), transparent 30%),
                         var(--bg);
             color: var(--text);
-            font-family: 'DM Sans', 'Segoe UI', sans-serif;
+        }
+
+        html, body, [class*="css"], [class*="st-"], .stApp {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
         }
 
         .block-container {
@@ -261,7 +270,7 @@ def get_aqua_glow_theme():
 def get_ember_glow_theme():
     return """
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
         :root {
             --bg: #140b0f;
@@ -278,7 +287,10 @@ def get_ember_glow_theme():
                         radial-gradient(circle at 85% 0%, rgba(255, 77, 121, 0.18), transparent 30%),
                         var(--bg);
             color: var(--text);
-            font-family: 'Barlow', 'Segoe UI', sans-serif;
+        }
+
+        html, body, [class*="css"], [class*="st-"], .stApp {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
         }
 
         .block-container {
@@ -356,7 +368,10 @@ def get_titanium_theme():
                         radial-gradient(circle at 90% 0%, rgba(157, 167, 178, 0.12), transparent 30%),
                         var(--bg);
             color: var(--text);
-            font-family: 'Inter', 'Segoe UI', sans-serif;
+        }
+
+        html, body, [class*="css"], [class*="st-"], .stApp {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
         }
 
         .block-container {
@@ -410,6 +425,103 @@ def get_titanium_theme():
         section[data-testid="stSidebar"] {
             background: rgba(15, 18, 24, 0.9);
             border-right: 1px solid var(--border);
+        }
+    </style>
+    """
+
+def get_antigravity_theme():
+    return """
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap');
+
+        :root {
+            --bg: #050505;
+            --card: rgba(20, 20, 35, 0.4);
+            --border: rgba(100, 100, 255, 0.1);
+            --primary: #a259ff;
+            --accent: #1abcf9;
+            --text: #ffffff;
+            --muted: #8b9bb4;
+            --glass: blur(20px) saturate(180%);
+        }
+
+        .stApp {
+            background: 
+                radial-gradient(circle at 50% 0%, rgba(162, 89, 255, 0.15), transparent 50%),
+                radial-gradient(circle at 0% 100%, rgba(26, 188, 249, 0.15), transparent 50%),
+                var(--bg);
+            color: var(--text);
+        }
+
+        html, body, [class*="css"], [class*="st-"], .stApp {
+            font-family: 'Outfit', sans-serif !important;
+        }
+
+        .block-container {
+            padding: 2.4rem 2.4rem 3rem 2.4rem;
+            max-width: 1100px;
+        }
+
+        h1, h2, h3 {
+            background: linear-gradient(135deg, #fff 0%, #a259ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+
+        p, label, span, li {
+            color: var(--muted);
+        }
+
+        /* Glass Cards */
+        .stTextInput>div>div>input,
+        .stTextArea>div>div>textarea,
+        .stSelectbox>div>div>div,
+        .stMultiSelect>div>div>div {
+            background: var(--card);
+            backdrop-filter: var(--glass);
+            -webkit-backdrop-filter: var(--glass);
+            border: 1px solid var(--border);
+            color: var(--text);
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .stTextInput>div>div>input:focus,
+        .stTextArea>div>div>textarea:focus,
+        .stSelectbox>div>div>div:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 30px rgba(162, 89, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Levitating Buttons */
+        .stButton>button {
+            background: linear-gradient(135deg, rgba(162, 89, 255, 0.8), rgba(26, 188, 249, 0.8));
+            backdrop-filter: blur(10px);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 0.7rem 1.5rem;
+            font-weight: 600;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .stButton>button:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(162, 89, 255, 0.4);
+        }
+
+        section[data-testid="stSidebar"] {
+            background: rgba(5, 5, 5, 0.8);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid var(--border);
+        }
+        
+        div[data-testid="stDivider"] hr {
+            border-color: var(--border);
         }
     </style>
     """

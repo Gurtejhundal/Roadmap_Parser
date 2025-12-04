@@ -99,36 +99,39 @@ def parse_roadmap(text):
             continue
             
         # Check for Task
+        # We now allow any line that isn't a header to be a task, even without bullets
+        # But we still check for bullets to strip them if present
         t_match = re_task.match(line)
+        task_text = line
         if t_match:
             task_text = t_match.group(2).strip()
-            
-            # Determine most specific context
-            timeframe_label = "Unassigned"
-            granularity = "generic"
-            
-            if current_hour:
-                timeframe_label = current_hour
-                granularity = "hour"
-            elif current_day:
-                timeframe_label = current_day
-                granularity = "day"
-            elif current_week:
-                timeframe_label = current_week
-                granularity = "week"
-            elif current_month:
-                timeframe_label = current_month
-                granularity = "month"
-            
-            # If unassigned, we might want to create a generic timeframe if not exists
-            # But for simplicity, we'll handle "Unassigned" in the DB saver or UI
-            
-            parsed_data.append({
-                "type": "task",
-                "title": task_text,
-                "timeframe_label": timeframe_label,
-                "granularity": granularity
-            })
-            continue
+        else:
+            # If no bullet, just take the whole line
+            task_text = line.strip()
+
+        # Determine most specific context
+        timeframe_label = "Unassigned"
+        granularity = "generic"
+        
+        if current_hour:
+            timeframe_label = current_hour
+            granularity = "hour"
+        elif current_day:
+            timeframe_label = current_day
+            granularity = "day"
+        elif current_week:
+            timeframe_label = current_week
+            granularity = "week"
+        elif current_month:
+            timeframe_label = current_month
+            granularity = "month"
+        
+        parsed_data.append({
+            "type": "task",
+            "title": task_text,
+            "timeframe_label": timeframe_label,
+            "granularity": granularity
+        })
+        continue
             
     return parsed_data

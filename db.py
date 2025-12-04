@@ -149,3 +149,70 @@ def rename_roadmap(roadmap_id, new_name):
     c.execute("UPDATE roadmaps SET name = ? WHERE id = ?", (new_name, roadmap_id))
     conn.commit()
     conn.close()
+
+def get_all_tasks_for_roadmap(roadmap_id):
+    """Fetch all tasks for a roadmap, ordered by timeframe to help reconstruction."""
+    conn = get_connection()
+    c = conn.cursor()
+    query = '''SELECT t.title, tf.label as timeframe_label
+               FROM tasks t
+               JOIN timeframes tf ON t.timeframe_id = tf.id
+               WHERE tf.roadmap_id = ?
+               ORDER BY tf.id, t.id'''
+    c.execute(query, (roadmap_id,))
+    res = [dict(row) for row in c.fetchall()]
+    conn.close()
+    return res
+
+def update_roadmap_content(roadmap_id, new_text, parser_func):
+    """
+    Update roadmap content by re-parsing the text.
+    This involves clearing existing timeframes/tasks and re-inserting them.
+    parser_func: The parse_roadmap function from parser.py (passed to avoid circular import if possible, or just import inside)
+    """
+    # First, parse the new text to ensure it's valid before deleting anything
+    parsed_data = parser_func(new_text)
+    
+    conn = get_connection()
+    c = conn.cursor()
+    
+    try:
+        # 1. Update raw_text in roadmaps table
+        c.execute("UPDATE roadmaps SET raw_text = ? WHERE id = ?", (new_text, roadmap_id))
+        
+        # 2. Delete existing tasks and timeframes
+        c.execute('''DELETE FROM tasks 
+                     WHERE timeframe_id IN (SELECT id FROM timeframes WHERE roadmap_id = ?)''', (roadmap_id,))
+        c.execute("DELETE FROM timeframes WHERE roadmap_id = ?", (roadmap_id,))
+        
+        # 3. Re-insert parsed data
+        # We need a way to map timeframe labels to IDs during insertion
+        # This logic mimics import_roadmap but within this transaction context
+        
+        # We'll use a local dictionary to track created timeframes in this session
+        # But since we are inside a function, we can just re-implement the saving logic using the cursor
+        
+        tf_map = {} # label -> id
+        
+        for item in parsed_data:
+            if item['type'] == 'task':
+                tf_label = item['timeframe_label']
+                granularity = item['granularity']
+                
+                if tf_label not in tf_map:
+                    c.execute("INSERT INTO timeframes (roadmap_id, label, granularity) VALUES (?, ?, ?)",
+                              (roadmap_id, tf_label, granularity))
+                    tf_map[tf_label] = c.lastrowid
+                
+                tf_id = tf_map[tf_label]
+                c.execute("INSERT INTO tasks (timeframe_id, title, created_at) VALUES (?, ?, ?)",
+                          (tf_id, item['title'], datetime.now().isoformat()))
+        
+        conn.commit()
+        return True
+    except Exception as e:
+        conn.rollback()
+        print(f"Error updating roadmap: {e}")
+        return False
+    finally:
+        conn.close()
